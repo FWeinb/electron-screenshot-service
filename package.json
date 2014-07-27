@@ -1,0 +1,20 @@
+{
+  "name": "atom-screenshot",
+  "main": "index.js",
+  "scripts" : {
+    "test" : "mocha test"
+  },
+  "dependencies": {
+    "gulp-download-atom-shell": "0.0.4",
+    "bluebird": "^2.2.2",
+    "win-spawn": "^2.0.0",
+    "socket.io": "^1.0.6",
+    "ws": "^0.4.31",
+    "messenger": "0.0.9"
+  },
+  "devDependencies": {
+    "is-png": "^0.1.1",
+    "image-size": "^0.3.2",
+    "win-spawn": "^2.0.0"
+  }
+}
