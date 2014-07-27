@@ -75,7 +75,8 @@ var createBrowser = function(){
     '.'
   ],{
     cwd: app,
-    env: process.env
+    env: process.env,
+    stdio : 'inherit'
   });
 
   return _isStarted;
