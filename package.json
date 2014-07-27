@@ -2,7 +2,7 @@
   "name": "atom-screenshot",
   "main": "index.js",
   "scripts" : {
-    "test" : "mocha test"
+    "test" : "node ./install.js && mocha test"
   },
   "dependencies": {
     "gulp-download-atom-shell": "0.0.4",
