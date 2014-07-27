@@ -7,6 +7,9 @@ setInterval(function(){}, 500);
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 var socket = require('socket.io-client')('ws://localhost:3000', { transports : ['websocket']});
 
+
+var show = process.env.NODESCREENSHOT_SHOW === '1' ? true : false;
+
 app.on('ready', function() {
 
 
@@ -43,7 +46,7 @@ function takeScreenshot(options, callback){
     width: options.width,
     height: options.height - 22,
     frame : false,
-    show : false,
+    show : show,
     'skip-taskbar' : true,
     'use-content-size' : true
   });
