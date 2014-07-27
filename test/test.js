@@ -24,10 +24,10 @@ describe('screenshot', function(){
   it('should produce pngs bigger than the screen', function(done){
     this.timeout(timeout);
 
-    screenshot({url : 'about:blank', width : 2500, height : 2500}).then(function(data){
+    screenshot({url : 'about:blank', width : 1024, height : 1024}).then(function(data){
       var size = imageSize(data);
-      assert.equal(size.width, 2500);
-      assert.equal(size.height, 2500);
+      assert.equal(size.width, 1024);
+      assert.equal(size.height, 1024);
       done();
     });
 
