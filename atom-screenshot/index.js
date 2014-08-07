@@ -41,7 +41,7 @@ function takeScreenshot(options, callback) {
   var popupWindow = new BrowserWindow({
     resizable: false,
     width: options.width,
-    height: options.height - 22,
+    height: options.height,
     frame : false,
     show : show,
     'skip-taskbar' : true,
