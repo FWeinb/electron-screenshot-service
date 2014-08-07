@@ -33,6 +33,16 @@ describe('screenshot', function(){
   });
 
 
+  it('should create a screenshot with 500x500 pixels', function(done){
+    this.timeout(timeout);
+    screenshot({url : 'about:blank', width : 500, height : 500}).then(function(data){
+      var size = imageSize(data);
+      assert.equal(size.width, 500);
+      assert.equal(size.height, 500);
+      done();
+    });
+  });
+
 
   it('should warn about missing `height`', function(done) {
     this.timeout(timeout);
