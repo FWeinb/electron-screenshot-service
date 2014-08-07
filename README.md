@@ -68,6 +68,11 @@ An crop object may look like this:
 
 # Changelog
 
+##### `0.1.1`
+
+  * Update to atom-shell `0.15.4`
+
+
 ##### `0.1.0`
 
   * 0.1.0 Inital release
