@@ -3,7 +3,6 @@
   "main": "index.js",
   "dependencies": {
     "socket.io-client": "^1.0.6",
-    "ws": "^0.4.31",
-    "messenger": "0.0.9"
+    "ws": "^0.4.31"
   }
 }

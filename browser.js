@@ -29,6 +29,8 @@ Browser.prototype.screenshot = function(options){
 
   options.id = requestId++;
 
+  options.delay = options.delay || 0;
+
   if ( !options.width || !options.height){
     deferred.reject(new Error('At least `height` and `width` must be set'));
     return promise;
@@ -75,8 +77,7 @@ var createBrowser = function(){
     '.'
   ],{
     cwd: app,
-    env: process.env,
-    stdio : 'inherit'
+    env: process.env
   });
 
   return _isStarted;
