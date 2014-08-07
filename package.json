@@ -1,6 +1,8 @@
 {
   "name": "atom-screenshot",
   "main": "index.js",
+  "description": "Take screenshots using atom-shell",
+  "version": "0.1.1",
   "scripts" : {
     "postinstall": "npm install --prefix ./atom-screenshot && node ./install.js",
     "test" : "node ./install.js && mocha test"
