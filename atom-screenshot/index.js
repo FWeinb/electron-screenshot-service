@@ -39,7 +39,6 @@ app.on('ready', function() {
 function takeScreenshot(options, callback) {
 
   var popupWindow = new BrowserWindow({
-    resizable: false,
     width: options.width,
     height: options.height,
     frame : false,
