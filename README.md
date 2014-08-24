@@ -5,7 +5,7 @@ node-atom-screenshot
 # Install 
 
 ```shell
-npm insall atom-screenshot
+npm install atom-screenshot
 ```
 
 ## Usage
