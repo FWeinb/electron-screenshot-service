@@ -2,7 +2,7 @@
   "name": "atom-screenshot",
   "main": "index.js",
   "description": "Take screenshots using atom-shell",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "scripts" : {
     "postinstall": "npm install --prefix ./atom-screenshot && node ./install.js",
     "test" : "node ./install.js && mocha test"
@@ -17,7 +17,6 @@
   },
   "devDependencies": {
     "is-png": "^0.1.1",
-    "image-size": "^0.3.2",
-    "win-spawn": "^2.0.0"
+    "image-size": "^0.3.2"
   }
 }

@@ -70,6 +70,10 @@ An crop object may look like this:
 
 ##### `0.1.2`
 
+  * Update to atom-shell `0.19.5`
+
+##### `0.1.2`
+
   * Update to atom-shell `0.15.8`
 
 ##### `0.1.1`
