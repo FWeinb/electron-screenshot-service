@@ -2,7 +2,6 @@
   "name": "atom-screenshot",
   "main": "index.js",
   "dependencies": {
-    "socket.io-client": "^1.0.6",
-    "ws": "^0.4.31"
+    "socket.io-client": "^1.2.1"
   }
 }
