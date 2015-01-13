@@ -55,4 +55,8 @@ describe('screenshot', function(){
 
   });
 
+  after(function(){
+    screenshot.close();
+  });
+
 });
