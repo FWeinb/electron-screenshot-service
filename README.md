@@ -80,6 +80,10 @@ Will close the screenshot service. Needed to let the node process exit
 
 # Changelog
 
+##### `0.3.2`
+  
+  * Use `window.requestAnimationFrame` to be sure that at least one paint has happend.
+
 ##### `0.3.1`
   
   * Force a redraw after injecting css
