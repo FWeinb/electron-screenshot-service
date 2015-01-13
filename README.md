@@ -21,7 +21,7 @@ screenshot({
 })
 .then(function(buffer){
   fs.writeFile('./out.png', buffer, function(err){
-
+    screenshot.close();
   });
 });
 ```
@@ -66,9 +66,18 @@ An crop object may look like this:
 }
 ```
 
+#### close()
+
+Will close the screenshot service. Needed to let the node process exit
+
 # Changelog
 
-##### `0.1.2`
+##### `0.2.0`
+
+  * Update to atom-shell `0.20.5`
+  * Add `close()` method
+
+##### `0.1.3`
 
   * Update to atom-shell `0.19.5`
 
@@ -79,7 +88,6 @@ An crop object may look like this:
 ##### `0.1.1`
 
   * Update to atom-shell `0.15.4`
-
 
 ##### `0.1.0`
 
