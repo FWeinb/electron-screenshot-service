@@ -80,6 +80,10 @@ Will close the screenshot service. Needed to let the node process exit
 
 # Changelog
 
+##### `0.3.1`
+  
+  * Force a redraw after injecting css
+
 ##### `0.3.0`
   
   * Add `css` option to inject custom css

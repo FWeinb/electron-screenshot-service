@@ -59,7 +59,12 @@ function takeScreenshot(options, callback) {
 
     if (options.css !== undefined) {
       popupWindow.webContents.insertCSS(options.css);
+
+      // Force a redraw!
+      popupWindow.setContentSize(0, 0);
+      popupWindow.setContentSize(options.width, options.height);
     }
+
 
     setTimeout(function(){
       if (typeof options.crop === 'object') {
