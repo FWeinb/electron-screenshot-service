@@ -1,17 +1,14 @@
 'use strict';
 
-var browserManager = require('./browser.js');
 var Promise = require('bluebird');
 
+var browserManager = require('./browser.js');
 
-process.on('exit', function() {
- browserManager.close();
-});
 
 /**
  * Takes an options object liek
  * { url : '', delay : [seconds], width : [size], heihgt :  [size], format : 'png|jpeg' default png };
- * returns a stream
+ * returns a promise
  */
 module.exports = function(options){
   return new Promise(function(resolve, reject) {
@@ -25,3 +22,9 @@ module.exports = function(options){
     });
   });
 };
+
+module.exports.close = function(){
+  browserManager.close();
+};
+
+process.on('exit', module.exports.close);

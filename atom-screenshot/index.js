@@ -2,7 +2,7 @@
 
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
-var socket = require('socket.io-client')('ws://localhost:3000', { transports : ['websocket']});
+var socket = require('socket.io-client')('ws://localhost:' + process.env.PORT, { transports : ['websocket']});
 
 
 var show = process.env.NODESCREENSHOT_SHOW === '1' ? true : false;

@@ -4,8 +4,8 @@ var path = require('path');
 
 var spawn = require('win-spawn');
 var Promise = require('bluebird');
-var server = require('http').createServer();
-var io = require('socket.io').listen(server);
+var http = require('http');
+var socketio = require('socket.io');
 
 var app =  path.join(__dirname, 'atom-screenshot');
 var atompath = require('./findpath');
@@ -55,7 +55,12 @@ Browser.prototype.screenshot = function(options){
 
 var _isStarted;
 var connection;
+var server;
 var createBrowser = function(){
+  server = http.createServer();
+
+  var io = socketio.listen(server);
+
   _isStarted = new Promise(function(resolve, reject){
 
     io.on('connection', function(socket){
@@ -71,14 +76,17 @@ var createBrowser = function(){
 
   });
 
-  server.listen(3000);
-
-  spawn(atompath, [
-    '.'
-  ],{
-    cwd: app,
-    env: process.env
+  server.on('listening', function(){
+    process.env.PORT = server.address().port;
+    spawn(atompath, [
+      '.'
+    ],{
+      cwd: app,
+      env: process.env
+    });
   });
+
+  server.listen(0, '127.0.0.1');
 
   return _isStarted;
 };
@@ -94,6 +102,8 @@ module.exports = {
     if ( connection ){
       connection.emit('close');
     }
-    server.close();
+    try {
+      server.close();
+    } catch(e){ }
   }
 };
