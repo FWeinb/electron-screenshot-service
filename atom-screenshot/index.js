@@ -57,15 +57,19 @@ function takeScreenshot(options, callback) {
 
   popupWindow.webContents.on('did-finish-load', function() {
 
-      setTimeout(function(){
-        if (typeof options.crop === 'object') {
-          popupWindow.capturePage(options.crop, callback);
-        }else{
-          popupWindow.capturePage(callback);
-        }
+    if (options.css !== undefined) {
+      popupWindow.webContents.insertCSS(options.css);
+    }
 
-        setTimeout(cleanup, 500);
-      }, (options.delay * 1000) + 100);
+    setTimeout(function(){
+      if (typeof options.crop === 'object') {
+        popupWindow.capturePage(options.crop, callback);
+      }else{
+        popupWindow.capturePage(callback);
+      }
+
+      setTimeout(cleanup, 500);
+    }, (options.delay * 1000) + 100);
 
   });
 }

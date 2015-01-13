@@ -52,6 +52,7 @@ Default: `0`
 Specify the height of the browser window
 
 ##### crop
+
 Type: `Object`  
 Default: `undefined`
 
@@ -66,11 +67,22 @@ An crop object may look like this:
 }
 ```
 
+##### css
+
+Type: `String`  
+Default: `undefined`
+
+This css will be injected into the page before the screenshot is taken.
+
 #### close()
 
 Will close the screenshot service. Needed to let the node process exit
 
 # Changelog
+
+##### `0.3.0`
+  
+  * Add `css` option to inject custom css
 
 ##### `0.2.0`
 

@@ -7,7 +7,7 @@ var browserManager = require('./browser.js');
 
 /**
  * Takes an options object liek
- * { url : '', delay : [seconds], width : [size], heihgt :  [size], format : 'png|jpeg' default png };
+ * { url : '', delay : [seconds], width : [size], heihgt :  [size], css : '[custom css]', format : 'png|jpeg' default png };
  * returns a promise
  */
 module.exports = function(options){
