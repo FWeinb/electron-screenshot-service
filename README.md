@@ -80,6 +80,13 @@ Will close the screenshot service. Needed to let the node process exit
 
 # Changelog
 
+##### `0.4.0`
+  
+  * Update to atom-shell `0.20.6`. 
+  * Better handeling of pages with iframes
+  * Include `jquery` because of a "bug" in `atom-shell` (See [#254](See https://github.com/atom/atom-shell/issues/254))
+  * Better error handeling
+
 ##### `0.3.2`
   
   * Use `window.requestAnimationFrame` to be sure that at least one paint has happend.
