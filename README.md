@@ -80,6 +80,11 @@ Will close the screenshot service. Needed to let the node process exit
 
 # Changelog
 
+##### `0.4.1`
+
+  * Cleanup repository 
+  * Remove duplicated dependency to `socket.io-client`
+
 ##### `0.4.0`
   
   * Update to atom-shell `0.20.6`. 

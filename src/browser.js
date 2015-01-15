@@ -8,10 +8,9 @@ var Promise = require('bluebird');
 var socketio = require('socket.io');
 
 var atompath = require('./findpath');
-var app =  path.join(__dirname, 'atom-screenshot');
+var app =  path.join(__dirname, '../', 'atom-screenshot');
 
 var requestId = 0; // Global request id
-
 
 var Browser = function(socket) {
   this.promises = {};
@@ -94,7 +93,7 @@ var createBrowser = function() {
   server.on('listening', function() {
     // Start atom-shell with correct port
     process.env.PORT = server.address().port;
-
+    console.log(atompath);
     spawn(atompath, [
       '.'
     ],{

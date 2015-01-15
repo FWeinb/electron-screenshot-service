@@ -5,7 +5,7 @@ var assert = require('assert');
 var imageSize = require('image-size');
 var isPng = require('is-png');
 
-var screenshot = require('./../index.js');
+var screenshot = require('./../src');
 
 var timeout = 30000;
 

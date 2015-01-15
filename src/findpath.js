@@ -1,6 +1,6 @@
 var fs = require('fs');
 var path = require('path');
-var bin = path.resolve(__dirname, 'atom');
+var bin = path.resolve(__dirname, '../atom');
 
 if (process.platform === 'darwin') {
   if (fs.existsSync(path.join(bin, 'Atom.app'))) {
