@@ -2,6 +2,7 @@
   "name": "atom-screenshot",
   "main": "index.js",
   "dependencies": {
+    "jquery": "^2.1.3",
     "socket.io-client": "^1.2.1"
   }
 }
