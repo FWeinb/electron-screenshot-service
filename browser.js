@@ -1,29 +1,42 @@
 'use strict';
 
 var path = require('path');
+var http = require('http');
 
 var spawn = require('win-spawn');
 var Promise = require('bluebird');
-var http = require('http');
 var socketio = require('socket.io');
 
-var app =  path.join(__dirname, 'atom-screenshot');
 var atompath = require('./findpath');
+var app =  path.join(__dirname, 'atom-screenshot');
 
-var requestId = 0;
+var requestId = 0; // Global request id
 
-var Browser = function(socket){
+
+var Browser = function(socket) {
   this.promises = {};
   this.socket = socket;
 
-  this.socket.on('screenshot', function(data){
-    var screenshotId = data.id;
-    this.promises[''+screenshotId].resolve(data.data);
+  this.socket.on('screenshot', function( data ) {
+    var promise = this.promises[''+data.id];
+
+    // This should never happen.
+    if (promise === undefined) { return; };
+
+    if (data.error) {
+      promise.reject(new Error(data.error));
+    } else {
+      promise.resolve(data.data);
+    }
+
+    // Remove this reject/resolved promise
+    delete this.promises[''+data.id];
   }.bind(this));
+
 };
 
 
-Browser.prototype.screenshot = function(options){
+Browser.prototype.screenshot = function( options ) {
   var deferred = Promise.pending();
   var promise  = deferred.promise;
 
@@ -31,12 +44,12 @@ Browser.prototype.screenshot = function(options){
 
   options.delay = options.delay || 0;
 
-  if ( !options.width || !options.height){
+  if ( !options.width || !options.height) {
     deferred.reject(new Error('At least `height` and `width` must be set'));
     return promise;
   }
 
-  if (options.crop){
+  if (options.crop) {
     if (!options.crop.x) { options.crop.x = 0; }
     if (!options.crop.y) { options.crop.y = 0; }
     if (!options.crop.width || !options.crop.height) {
@@ -46,8 +59,9 @@ Browser.prototype.screenshot = function(options){
   }
 
 
-  this.socket.emit('take-screenshot', options);
   this.promises[''+options.id] = deferred;
+
+  this.socket.emit('take-screenshot', options);
 
   return deferred.promise;
 };
@@ -56,28 +70,31 @@ Browser.prototype.screenshot = function(options){
 var _isStarted;
 var connection;
 var server;
-var createBrowser = function(){
+
+var createBrowser = function() {
   server = http.createServer();
 
   var io = socketio.listen(server);
 
-  _isStarted = new Promise(function(resolve, reject){
+  _isStarted = new Promise(function( resolve, reject ) {
 
-    io.on('connection', function(socket){
+    io.on('connection', function( socket ) {
       if (!connection) {
         resolve( new Browser(socket) );
         connection = socket;
       }
     });
 
-    io.on('error', function(error){
+    io.on('error', function( error ) {
       reject(error);
     });
 
   });
 
-  server.on('listening', function(){
+  server.on('listening', function() {
+    // Start atom-shell with correct port
     process.env.PORT = server.address().port;
+
     spawn(atompath, [
       '.'
     ],{
@@ -86,6 +103,7 @@ var createBrowser = function(){
     });
   });
 
+  // Start the server on a free port
   server.listen(0, '127.0.0.1');
 
   return _isStarted;
@@ -93,17 +111,19 @@ var createBrowser = function(){
 
 module.exports = {
 
-  getBrowser : function(){
+  getBrowser : function() {
     return _isStarted || createBrowser();
   },
 
-  close : function(){
+  close : function() {
     _isStarted = undefined;
-    if ( connection ){
+
+    if ( connection ) {
       connection.emit('close');
     }
+
     try {
       server.close();
-    } catch(e){ }
+    } catch(e) { }
   }
 };
