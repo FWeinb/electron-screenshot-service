@@ -60,6 +60,7 @@ Browser.prototype.screenshot = function( options ) {
 
   this.promises[''+options.id] = deferred;
 
+  console.log('Take a screenshot ', options);
   this.socket.emit('take-screenshot', options);
 
   return deferred.promise;
@@ -93,6 +94,7 @@ var createBrowser = function() {
   server.on('listening', function() {
     // Start atom-shell with correct port
     process.env.PORT = server.address().port;
+    console.log('Found atom-shell at: ', atompath);
     spawn(atompath, [
       '.'
     ],{
