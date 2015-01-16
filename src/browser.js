@@ -93,7 +93,6 @@ var createBrowser = function() {
   server.on('listening', function() {
     // Start atom-shell with correct port
     process.env.PORT = server.address().port;
-    console.log(atompath);
     spawn(atompath, [
       '.'
     ],{

@@ -4,8 +4,7 @@ var app = require('app');
 var BrowserWindow = require('browser-window');
 var ipc = require('ipc');
 
-var socket = require('../node_modules/socket.io/lib/client')('ws://localhost:' + process.env.PORT, { transports: ['websocket']});
-
+var socket = require('socket.io-client')('ws://localhost:' + process.env.PORT, { transports: ['websocket']});
 
 var show = process.env.NODESCREENSHOT_SHOW === '1' ? true: false;
 
