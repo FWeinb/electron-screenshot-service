@@ -122,7 +122,7 @@ function takeScreenshot(options, sCall, eCall) {
   });
 
   var asked = false;
-  popupWindow.webContents.on('did-finish-load', function(){
+  popupWindow.webContents.on('did-stop-loading', function(){
     resetTimeout(makeScreenshot);
 
     // Shortcut for pages without any iframes
