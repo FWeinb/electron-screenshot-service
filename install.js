@@ -8,7 +8,7 @@ downloadatomshell({
 }, function(){
 
   if (process.platform === 'linux'){
-    var atompath = require('./findpath');
+    var atompath = require('./src/findpath');
     fs.chmodSync(atompath, '0777');
   }
 
