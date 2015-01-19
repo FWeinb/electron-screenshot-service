@@ -2,16 +2,16 @@
   "name": "atom-screenshot",
   "main": "src/index.js",
   "description": "Take screenshots using atom-shell",
-  "version": "0.4.1",
-  "scripts" : {
+  "version": "0.4.2",
+  "scripts": {
     "postinstall": "npm install --prefix ./atom-screenshot && node ./install.js",
-    "test" : "node ./install.js && mocha test"
+    "test": "node ./install.js && mocha test"
   },
   "dependencies": {
-    "gulp-download-atom-shell": "0.0.4",
     "bluebird": "^2.2.5",
-    "win-spawn": "^2.0.0",
-    "socket.io": "^1.2.1"
+    "gulp-download-atom-shell": "0.0.4",
+    "socket.io": "^1.2.1",
+    "win-spawn": "^2.0.0"
   },
   "devDependencies": {
     "is-png": "^1.0.0",

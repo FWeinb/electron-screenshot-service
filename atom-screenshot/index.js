@@ -50,6 +50,8 @@ app.on('ready', function() {
 function takeScreenshot(options, sCall, eCall) {
 
   var popupWindow = new BrowserWindow({
+    x:0,
+    y:0,
     width: 0,
     height: 0,
     show: show,
@@ -73,15 +75,30 @@ function takeScreenshot(options, sCall, eCall) {
 
   var makeScreenshot = function(){
 
-    // Remove any laodTimeout
+    // Remove any loadTimeout
     clearTimeout(loadTimeout);
 
     var loadEvent = 'Loaded-' + options.id;
+    var sizeEvent = 'Size-' + options.id;
 
     // requestAnimationFrame will call the function before the next repaint.
-    // Doing it twice will call the load() function after the first paint.
     // This way it is ensured that at least on paint has happend.
-    popupWindow.webContents.executeJavaScript('var ra=window.requestAnimationFrame;function load(){require("ipc").send("'+loadEvent+'");};window["__node_atom_shell_loaded__"] = function(){ra(function(){ra(load);});}');
+    popupWindow.webContents.executeJavaScript(
+      'var __atom__ra = window.requestAnimationFrame;' +
+      'var __atom__ipc = require("ipc");' +
+      'function __atom__load(){__atom__ipc.send("'+loadEvent+'");};' +
+      'function __atom__size(){__atom__ipc.send("'+sizeEvent+'",{width: document.body.clientWidth, height: document.body.clientHeight});};' +
+      'window["__atom__loaded__"] = function(){'+
+        '__atom__ra(function(){' +
+          // Be sure to render the whole page
+          'document.body.scrollTop=document.body.clientHeight;' +
+          '__atom__ra(function(){'+
+            // Take screenshot at offset
+            'document.body.scrollTop='+(options.pageOffset || 0)+';'+
+            '__atom__ra(__atom__load);'+
+          '});' +
+        '});' +
+      '}');
 
     // Inject custom CSS if necessary
     if (options.css !== undefined) {
@@ -103,15 +120,25 @@ function takeScreenshot(options, sCall, eCall) {
       }, options.delay * 1000);
     });
 
+    // Register the IPC sizeEvent once
+    ipc.once(sizeEvent, function(e, data){
+      popupWindow.setSize(data.width, data.height);
+      popupWindow.webContents.executeJavaScript('window["__atom__loaded__"]()');
+    });
+
+
     // Resize to the correct size
-    // This is needed to trigger the actual screenshot function
-    // and ensures that all styles are up to date
+    // ensures that all styles are up to date
     popupWindow.setSize(options.width, options.height);
 
-    popupWindow.webContents.executeJavaScript('window["__node_atom_shell_loaded__"]()');
+    if (options.page) {
+      popupWindow.webContents.executeJavaScript('window["__atom__size"]()');
+    } else {
+      popupWindow.webContents.executeJavaScript('window["__atom__loaded__"]()');
+    }
   };
 
-  popupWindow.webContents.on('did-fail-load', function(errorCode, errorDescription) {
+  popupWindow.webContents.on('did-fail-load', function(e, errorCode, errorDescription) {
     eCall(new Error(errorDescription));
     cleanup();
   });
