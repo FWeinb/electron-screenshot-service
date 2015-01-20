@@ -3,10 +3,11 @@
 var app = require('app');
 var BrowserWindow = require('browser-window');
 var ipc = require('ipc');
-
-var socket = require('socket.io-client')('ws://localhost:' + process.env.PORT, { transports: ['websocket']});
+var sock = require('axon').socket('rep');
 
 var show = process.env.NODESCREENSHOT_SHOW === '1' ? true: false;
+
+sock.connect(parseInt(process.env.PORT, 10));
 
 app.on('ready', function() {
 
@@ -14,35 +15,29 @@ app.on('ready', function() {
     app.dock.hide();
   }
 
-  socket.on('connect', function() {
+  var emitSuccess = function( reply, cleanup, data ) {
+    reply(null, data, cleanup);
+  };
 
-    var emitSuccess = function( options, cleanup, data ) {
-      socket.emit('screenshot', {
-        id: options.id,
-        data: data
-      }, cleanup);
-    };
+  var emitError = function( reply, error ) {
+    reply(error, null);
+  };
 
-    var emitError = function( options, error ) {
-      socket.emit('screenshot', {
-        id: options.id,
-        error: error.message
-      });
-    };
+  sock.on('message', function(task, options, reply){
+    switch (task) {
+      case 'take-screenshot' :
+        takeScreenshot(
+          options,
+          emitSuccess.bind(null, reply),
+          emitError.bind(null, reply)
+        );
+        break;
+    }
+  });
 
-    socket.on('take-screenshot', function(options) {
-      takeScreenshot(
-        options,
-        emitSuccess.bind(null, options),
-        emitError.bind(null, options)
-      );
-    });
-
-    socket.on('close', function(){
-      app.terminate();
-      process.exit();
-    });
-
+  sock.on('close', function(){
+    app.terminate();
+    process.exit();
   });
 });
 
@@ -63,8 +58,10 @@ function takeScreenshot(options, sCall, eCall) {
   });
 
   var cleanup = function(){
-    popupWindow.close();
-    popupWindow = null;
+    setTimeout(function(){
+      popupWindow.close();
+      popupWindow = null;
+    }, 1000);
   };
 
   var loadTimeout;
@@ -74,7 +71,6 @@ function takeScreenshot(options, sCall, eCall) {
   };
 
   var makeScreenshot = function(){
-
     // Remove any loadTimeout
     clearTimeout(loadTimeout);
 
@@ -86,8 +82,8 @@ function takeScreenshot(options, sCall, eCall) {
     popupWindow.webContents.executeJavaScript(
       'var __atom__ra = window.requestAnimationFrame;' +
       'var __atom__ipc = require("ipc");' +
-      'function __atom__load(){__atom__ipc.send("'+loadEvent+'");};' +
-      'function __atom__size(){__atom__ipc.send("'+sizeEvent+'",{width: document.body.clientWidth, height: document.body.clientHeight});};' +
+      'function __atom__load(){__atom__ipc.sendSync("'+loadEvent+'");};' +
+      'function __atom__size(){__atom__ipc.sendSync("'+sizeEvent+'",{width: document.body.clientWidth, height: document.body.clientHeight});};' +
       'window["__atom__loaded__"] = function(){'+
         '__atom__ra(function(){' +
           // Be sure to render the whole page
@@ -165,7 +161,6 @@ function takeScreenshot(options, sCall, eCall) {
     }
 
   });
-
   // Start loading the URL
   popupWindow.loadUrl(options.url);
 }

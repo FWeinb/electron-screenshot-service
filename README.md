@@ -80,6 +80,11 @@ Will close the screenshot service. Needed to let the node process exit
 
 # Changelog
 
+
+##### `0.4.3`
+
+  * Fix scroll jumping
+
 ##### `0.4.1`
 
   * Cleanup repository 
