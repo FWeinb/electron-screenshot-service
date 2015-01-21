@@ -3,7 +3,7 @@ var fs = require('fs');
 var downloadatomshell = require('gulp-download-atom-shell');
 
 downloadatomshell({
-  version: '0.20.6',
+  version: '0.20.7',
   outputDir: 'atom'
 }, function(){
 

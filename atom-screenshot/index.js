@@ -47,21 +47,21 @@ function takeScreenshot(options, sCall, eCall) {
   var popupWindow = new BrowserWindow({
     x:0,
     y:0,
-    width: 0,
-    height: 0,
+    width: options.width,
+    height: options.height,
     show: show,
     frame: false,
     preload: __dirname + '/preload.js',
     transparent: options.transparent || false,
     'enable-larger-than-screen': true,
-    'skip-taskbar': true
+    'skip-taskbar': true,
+    'overlay-scrollbars': true,
+    'direct-write': true
   });
 
   var cleanup = function(){
-    setTimeout(function(){
-      popupWindow.close();
-      popupWindow = null;
-    }, 1000);
+    popupWindow.webContents.executeJavaScript('window["__atom__close"]()');
+    popupWindow = null;
   };
 
   var loadTimeout;
@@ -74,24 +74,27 @@ function takeScreenshot(options, sCall, eCall) {
     // Remove any loadTimeout
     clearTimeout(loadTimeout);
 
-    var loadEvent = 'Loaded-' + options.id;
-    var sizeEvent = 'Size-' + options.id;
+    var loadEvent = 'Loaded-' + popupWindow.id;
+    var sizeEvent = 'Size-' + popupWindow.id;
 
     // requestAnimationFrame will call the function before the next repaint.
     // This way it is ensured that at least on paint has happend.
     popupWindow.webContents.executeJavaScript(
       'var __atom__ra = window.requestAnimationFrame;' +
       'var __atom__ipc = require("ipc");' +
-      'function __atom__load(){__atom__ipc.sendSync("'+loadEvent+'");};' +
-      'function __atom__size(){__atom__ipc.sendSync("'+sizeEvent+'",{width: document.body.clientWidth, height: document.body.clientHeight});};' +
+      'function __atom__close(){require("remote").getCurrentWindow().close();}' +
+      'function __atom__load(){__atom__ipc.send("'+loadEvent+'");};' +
+      'function __atom__size(){__atom__ipc.send("'+sizeEvent+'",{width: document.body.clientWidth, height: document.body.clientHeight});};' +
       'window["__atom__loaded__"] = function(){'+
         '__atom__ra(function(){' +
-          // Be sure to render the whole page
+          // Be sure to render the whole page before taking the screenshot
           'document.body.scrollTop=document.body.clientHeight;' +
           '__atom__ra(function(){'+
-            // Take screenshot at offset
-            'document.body.scrollTop='+(options.pageOffset || 0)+';'+
-            '__atom__ra(__atom__load);'+
+            '__atom__ra(function(){'+
+              // Take screenshot at offset
+              'document.body.scrollTop='+(options.pageOffset || 0)+';'+
+              '__atom__ra(__atom__load);'+
+            '});' +
           '});' +
         '});' +
       '}');
@@ -125,6 +128,8 @@ function takeScreenshot(options, sCall, eCall) {
 
     // Resize to the correct size
     // ensures that all styles are up to date
+    // hiding the scrollbars need a browser resize
+    popupWindow.setSize(0, 0);
     popupWindow.setSize(options.width, options.height);
 
     if (options.page) {

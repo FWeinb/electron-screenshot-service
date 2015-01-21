@@ -27,4 +27,5 @@ module.exports.close = function(){
   browserManager.close();
 };
 
+// Ensure that the Browser instance will be closed on exit
 process.on('exit', module.exports.close);

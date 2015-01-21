@@ -80,6 +80,10 @@ Will close the screenshot service. Needed to let the node process exit
 
 # Changelog
 
+##### `0.4.4`
+
+  * Update to atom-shell `.0.22.7`
+  * Improved perfomance by switching to [`axon`](https://github.com/tj/axon) for ipc.
 
 ##### `0.4.3`
 
