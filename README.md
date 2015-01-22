@@ -1,4 +1,4 @@
-node-atom-screenshot
+node-atom-screenshot [![Build Status](https://travis-ci.org/FWeinb/node-atom-screenshot.svg?branch=master)](https://travis-ci.org/FWeinb/node-atom-screenshot)
 ====================
 > Take screenshots using atom-shell
 
