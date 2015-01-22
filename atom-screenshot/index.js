@@ -129,7 +129,7 @@ function takeScreenshot(options, sCall, eCall) {
     // Resize to the correct size
     // ensures that all styles are up to date
     // hiding the scrollbars need a browser resize
-    popupWindow.setSize(0, 0);
+    popupWindow.setSize(10, 10); // Linux can't handle 0, 0
     popupWindow.setSize(options.width, options.height);
 
     if (options.page) {
