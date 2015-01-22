@@ -80,6 +80,10 @@ Will close the screenshot service. Needed to let the node process exit
 
 # Changelog
 
+##### `0.4.5`
+
+  * Fix bug on linux (X11)
+
 ##### `0.4.4`
 
   * Update to atom-shell `.0.22.7`
