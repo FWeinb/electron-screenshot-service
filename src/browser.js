@@ -32,9 +32,13 @@ Browser.prototype.screenshot = function( options ) {
     }
   }
 
-  this.sock.send('take-screenshot', options, function(error, res){
+  this.sock.send('take-screenshot', options, function(error, img){
     if (error) { deferred.reject(error); return; }
-    deferred.resolve(res);
+
+    // Create a real buffer from data
+    img.data = new Buffer(img.data.data);
+
+    deferred.resolve(img);
   });
 
   return deferred.promise;

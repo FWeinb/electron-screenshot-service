@@ -4,7 +4,6 @@
 var http = require('http');
 
 var assert = require('assert');
-var imageSize = require('image-size');
 var isPng = require('is-png');
 
 var screenshot = require('./../src');
@@ -21,8 +20,8 @@ describe('screenshot', function(){
   it('should produce pngs', function(done){
     this.timeout(timeout);
 
-    screenshot({url : 'http://127.0.0.1:9090', width : 500, height : 500}).then(function(data) {
-      assert.ok(isPng(data));
+    screenshot({url : 'http://127.0.0.1:9090', width : 500, height : 500}).then(function(img) {
+      assert.ok(isPng(img.data));
       done();
     });
 
@@ -42,10 +41,9 @@ describe('screenshot', function(){
 
   it('should create a screenshot with 500x500 pixels', function(done){
     this.timeout(timeout);
-    screenshot({url : 'http://127.0.0.1:9090', width : 500, height : 500}).then(function(data){
-      var size = imageSize(data);
-      assert.equal(size.width, 500);
-      assert.equal(size.height, 500);
+    screenshot({url : 'http://127.0.0.1:9090', width : 500, height : 500}).then(function(img){
+      assert.equal(img.size.width, 500);
+      assert.equal(img.size.height, 500);
       done();
     });
   });

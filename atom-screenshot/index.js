@@ -16,7 +16,7 @@ app.on('ready', function() {
   }
 
   var emitSuccess = function( reply, cleanup, data ) {
-    reply(null, data, cleanup);
+    reply(null, { data: data.toPng(), size: data.getSize() }, cleanup);
   };
 
   var emitError = function( reply, error ) {
@@ -74,6 +74,11 @@ function takeScreenshot(options, sCall, eCall) {
     // Remove any loadTimeout
     clearTimeout(loadTimeout);
 
+    // Inject custom CSS if necessary
+    if (options.css !== undefined) {
+      popupWindow.webContents.insertCSS(options.css);
+    }
+
     var loadEvent = 'Loaded-' + popupWindow.id;
     var sizeEvent = 'Size-' + popupWindow.id;
 
@@ -84,11 +89,16 @@ function takeScreenshot(options, sCall, eCall) {
       'var __atom__ipc = require("ipc");' +
       'function __atom__close(){require("remote").getCurrentWindow().close();}' +
       'function __atom__load(){__atom__ipc.send("'+loadEvent+'");};' +
-      'function __atom__size(){__atom__ipc.send("'+sizeEvent+'",{width: document.body.clientWidth, height: document.body.clientHeight});};' +
-      'window["__atom__loaded__"] = function(){'+
+      'function __atom__size(){var w = window,d = document,e = d.documentElement,g = d.body,' +
+	'width = Math.max(w.innerWidth, e.clientWidth, g.clientWidth,'+options.width+'),' +
+	'height = Math.max(w.innerHeight, e.clientHeight, g.clientHeight,'+options.height+');' +
+	'__atom__ipc.send("'+sizeEvent+'",{width: width, height: height});' +
+      '};' +
+      'function __atom__loaded(){'+
         '__atom__ra(function(){' +
           // Be sure to render the whole page before taking the screenshot
-          'document.body.scrollTop=document.body.clientHeight;' +
+	  // This seams to be not necessary as of atom-shell@0.21.3
+	  //'document.body.scrollTop=document.body.clientHeight;' +
           '__atom__ra(function(){'+
             '__atom__ra(function(){'+
               // Take screenshot at offset
@@ -98,11 +108,6 @@ function takeScreenshot(options, sCall, eCall) {
           '});' +
         '});' +
       '}');
-
-    // Inject custom CSS if necessary
-    if (options.css !== undefined) {
-      popupWindow.webContents.insertCSS(options.css);
-    }
 
     // Register the IPC load event once
     ipc.once(loadEvent, function(){
@@ -122,7 +127,7 @@ function takeScreenshot(options, sCall, eCall) {
     // Register the IPC sizeEvent once
     ipc.once(sizeEvent, function(e, data){
       popupWindow.setSize(data.width, data.height);
-      popupWindow.webContents.executeJavaScript('window["__atom__loaded__"]()');
+      popupWindow.webContents.executeJavaScript('window["__atom__loaded"]()');
     });
 
 
@@ -135,7 +140,7 @@ function takeScreenshot(options, sCall, eCall) {
     if (options.page) {
       popupWindow.webContents.executeJavaScript('window["__atom__size"]()');
     } else {
-      popupWindow.webContents.executeJavaScript('window["__atom__loaded__"]()');
+      popupWindow.webContents.executeJavaScript('window["__atom__loaded"]()');
     }
   };
 
