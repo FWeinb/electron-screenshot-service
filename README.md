@@ -19,14 +19,26 @@ screenshot({
   width : 1024,
   height : 768
 })
-.then(function(buffer){
-  fs.writeFile('./out.png', buffer, function(err){
+.then(function(img){
+  fs.writeFile('./out.png', img.data, function(err){
     screenshot.close();
   });
 });
 ```
 
 #### screenshot(options)
+
+Will return a Promise containing an object like:
+
+```js
+{
+  data: <Buffer >
+  size: {
+    width: X
+    height: N
+  }
+}
+```
 
 ##### delay
 
@@ -39,14 +51,14 @@ Useful when the site does things after load that you want to capture.
 
 ##### width
 
-Type: `int`  
+Type: `number`
 Default: `0`
 
 Specify the with of the browser window
 
 ##### height
 
-Type: `int`  
+Type: `number`
 Default: `0`
 
 Specify the height of the browser window
@@ -56,7 +68,6 @@ Specify the height of the browser window
 Type: `Object`  
 Default: `undefined`
 
-This will only work if generating png's. 
 An crop object may look like this:
 ```js
 {
@@ -79,6 +90,11 @@ This css will be injected into the page before the screenshot is taken.
 Will close the screenshot service. Needed to let the node process exit
 
 # Changelog
+
+##### `0.5.0`
+
+  * Upgrade to `atom-shell@0.21.3`
+  * The Promise will no return the image `data` and `size`.
 
 ##### `0.4.5`
 

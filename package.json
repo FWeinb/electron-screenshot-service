@@ -2,7 +2,7 @@
   "name": "atom-screenshot",
   "main": "src/index.js",
   "description": "Take screenshots using atom-shell",
-  "version": "0.4.5",
+  "version": "0.5.0",
   "scripts": {
     "postinstall": "npm install --prefix ./atom-screenshot && node ./install.js",
     "test": "node ./install.js && mocha test"
