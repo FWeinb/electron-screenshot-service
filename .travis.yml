@@ -2,9 +2,8 @@ language: node_js
 env:
   - NODESCREENSHOT_SHOW=1
 node_js:
-  - '0.10'
+  - '0.12'
 before_script:
-  - npm install -g mocha
   - export DISPLAY=:99.0; sh -e /etc/init.d/xvfb start +extension RANDR;
   - sudo apt-get -qq update
   - sudo apt-get -y install libx11-6:i386;

@@ -5,7 +5,7 @@ var Promise = require('bluebird');
 var screenshot = require('../');
 
 
-Promise.all(['http://codepen.io', 'http://google.de', 'http://sassdoc.com'].map(function(url){
+Promise.all(['http://www.sassdoc.com/'].map(function(url){
   console.log('Screenshot, ', url);
   return screenshot({
       url: url,

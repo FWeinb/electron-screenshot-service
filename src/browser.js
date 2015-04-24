@@ -6,8 +6,8 @@ var axon = require('axon');
 var spawn = require('win-spawn');
 var Promise = require('bluebird');
 
-var atompath = require('./findpath');
-var app =  path.join(__dirname, '../', 'atom-screenshot');
+var electronpath = require('electron-prebuilt');
+var app =  path.join(__dirname, '../', 'electron-screenshot');
 
 var Browser = function( sock ) {
   this.sock = sock;
@@ -63,11 +63,10 @@ var createBrowser = function() {
   // Start the server on a free port
   sock.bind(undefined, 'localhost', function() {
     process.env.PORT = sock.server.address().port;
-    spawn(atompath, [
+    spawn(electronpath, [
       '.'
     ],{
-      cwd: app,
-      env: process.env
+      cwd: app
     });
   });
 

@@ -1,20 +1,22 @@
 {
-  "name": "atom-screenshot",
+  "name": "electron-screenshot-service",
   "main": "src/index.js",
-  "description": "Take screenshots using atom-shell",
-  "version": "0.5.0",
+  "description": "Take screenshots using electron",
+  "version": "1.0.0",
   "scripts": {
-    "postinstall": "npm install --prefix ./atom-screenshot && node ./install.js",
-    "test": "node ./install.js && mocha test"
+    "postinstall": "npm install --prefix ./electron-screenshot",
+    "test": "./node_modules/mocha/bin/mocha test"
   },
   "dependencies": {
     "axon": "^2.0.1",
-    "bluebird": "^2.2.5",
-    "gulp-download-atom-shell": "0.0.4",
+    "bluebird": "^2.9.24",
+    "electron-prebuilt": "^0.24.0",
     "win-spawn": "^2.0.0"
   },
   "devDependencies": {
+    "electron-prebuilt": "^0.24.0",
+    "image-size": "^0.3.2",
     "is-png": "^1.0.0",
-    "image-size": "^0.3.2"
+    "mocha": "^2.2.4"
   }
 }

@@ -1,0 +1,7 @@
+{
+  "name": "electron-screenshot",
+  "main": "index.js",
+  "dependencies": {
+    "axon": "^2.0.1"
+  }
+}

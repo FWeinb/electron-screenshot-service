@@ -49,9 +49,11 @@ function takeScreenshot(options, sCall, eCall) {
     y:0,
     width: options.width,
     height: options.height,
-    show: show,
+    show: true,
     frame: false,
+    // Used to load the ipc module into __electron__ipc`
     preload: __dirname + '/preload.js',
+    'node-integration': false,
     transparent: options.transparent || false,
     'enable-larger-than-screen': true,
     'skip-taskbar': true,
@@ -60,7 +62,7 @@ function takeScreenshot(options, sCall, eCall) {
   });
 
   var cleanup = function(){
-    popupWindow.webContents.executeJavaScript('window["__atom__close"]()');
+    popupWindow.close();
     popupWindow = null;
   };
 
@@ -85,27 +87,18 @@ function takeScreenshot(options, sCall, eCall) {
     // requestAnimationFrame will call the function before the next repaint.
     // This way it is ensured that at least on paint has happend.
     popupWindow.webContents.executeJavaScript(
-      'var __atom__ra = window.requestAnimationFrame;' +
-      'var __atom__ipc = require("ipc");' +
-      'function __atom__close(){require("remote").getCurrentWindow().close();}' +
-      'function __atom__load(){__atom__ipc.send("'+loadEvent+'");};' +
-      'function __atom__size(){var w = window,d = document,e = d.documentElement,g = d.body,' +
-	'width = Math.max(w.innerWidth, e.clientWidth, g.clientWidth,'+options.width+'),' +
-	'height = Math.max(w.innerHeight, e.clientHeight, g.clientHeight,'+options.height+');' +
-	'__atom__ipc.send("'+sizeEvent+'",{width: width, height: height});' +
+      'var __electron__ra = window.requestAnimationFrame;' +
+      'function __electron__load(){__electron__ipc.send("'+loadEvent+'");};' +
+      'function __electron__size(){var w = window,d = document,e = d.documentElement,g = d.body,' +
+      'width = Math.max(w.innerWidth, e.clientWidth, g.clientWidth,'+options.width+'),' +
+      'height = Math.max(w.innerHeight, e.clientHeight, g.clientHeight,'+options.height+');' +
+      '__electron__ipc.send("'+sizeEvent+'",{width: width, height: height});' +
       '};' +
-      'function __atom__loaded(){'+
-        '__atom__ra(function(){' +
-          // Be sure to render the whole page before taking the screenshot
-	  // This seams to be not necessary as of atom-shell@0.21.3
-	  //'document.body.scrollTop=document.body.clientHeight;' +
-          '__atom__ra(function(){'+
-            '__atom__ra(function(){'+
-              // Take screenshot at offset
-              'document.body.scrollTop='+(options.pageOffset || 0)+';'+
-              '__atom__ra(__atom__load);'+
-            '});' +
-          '});' +
+      'function __electron__loaded(){'+
+        '__electron__ra(function(){' +
+          // Take screenshot at offset
+          'document.body.scrollTop='+(options.pageOffset || 0)+';'+
+          '__electron__ra(__electron__load);'+
         '});' +
       '}');
 
@@ -126,21 +119,16 @@ function takeScreenshot(options, sCall, eCall) {
 
     // Register the IPC sizeEvent once
     ipc.once(sizeEvent, function(e, data){
-      popupWindow.setSize(data.width, data.height);
-      popupWindow.webContents.executeJavaScript('window["__atom__loaded"]()');
+      // Don't be smaller than options.width, options.height
+      popupWindow.setSize(Math.max(options.width, data.width), Math.max(options.height, data.height));
+      popupWindow.webContents.executeJavaScript('window["__electron__loaded"]()');
     });
 
 
-    // Resize to the correct size
-    // ensures that all styles are up to date
-    // hiding the scrollbars need a browser resize
-    popupWindow.setSize(10, 10); // Linux can't handle 0, 0
-    popupWindow.setSize(options.width, options.height);
-
     if (options.page) {
-      popupWindow.webContents.executeJavaScript('window["__atom__size"]()');
+      popupWindow.webContents.executeJavaScript('window["__electron__size"]()');
     } else {
-      popupWindow.webContents.executeJavaScript('window["__atom__loaded"]()');
+      popupWindow.webContents.executeJavaScript('window["__electron__loaded"]()');
     }
   };
 
@@ -166,7 +154,7 @@ function takeScreenshot(options, sCall, eCall) {
           makeScreenshot();
         }
       });
-      popupWindow.webContents.executeJavaScript('require("ipc").send("frame-count", window.frames.length)');
+      popupWindow.webContents.executeJavaScript('__electron__ipc.send("frame-count", window.frames.length)');
       asked = true;
     }
 

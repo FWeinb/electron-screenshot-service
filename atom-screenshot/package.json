@@ -1,8 +1,0 @@
-{
-  "name": "atom-screenshot",
-  "main": "index.js",
-  "dependencies": {
-    "axon": "^2.0.1",
-    "jquery": "^2.1.3"
-  }
-}

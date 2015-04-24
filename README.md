@@ -1,18 +1,18 @@
-node-atom-screenshot [![Build Status](https://travis-ci.org/FWeinb/node-atom-screenshot.svg?branch=master)](https://travis-ci.org/FWeinb/node-atom-screenshot)
+electron-screenshot-service [![Build Status](https://travis-ci.org/FWeinb/electron-screenshot-service.svg?branch=master)](https://travis-ci.org/FWeinb/electron-screenshot-service)
 ====================
-> Take screenshots using atom-shell
+> Take screenshots using electron
 
 # Install 
 
 ```shell
-npm install atom-screenshot
+npm install electron-screenshot-service
 ```
 
 ## Usage
 
 ```js
 var fs = require('fs');
-var screenshot = require('atom-screenshot');
+var screenshot = require('electron-screenshot-service');
 
 screenshot({
   url : 'http://google.de',
@@ -90,6 +90,11 @@ This css will be injected into the page before the screenshot is taken.
 Will close the screenshot service. Needed to let the node process exit
 
 # Changelog
+
+##### `1.0.0`
+
+  * Upgrade to `electron@0.24.0`
+  * Renamed to `electron-screenshot-service`
 
 ##### `0.5.0`
 
