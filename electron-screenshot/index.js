@@ -49,7 +49,7 @@ function takeScreenshot(options, sCall, eCall) {
     y:0,
     width: options.width,
     height: options.height,
-    show: true,
+    show: show,
     frame: false,
     // Used to load the ipc module into __electron__ipc`
     preload: __dirname + '/preload.js',
