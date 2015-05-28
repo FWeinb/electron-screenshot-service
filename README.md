@@ -93,6 +93,13 @@ Default: `false`
 This will enable transparency. Keep in mind that most site do set a background color on the html/body tag.
 You can overwrite this by using the `css` option using something like `html,body{ background-color: transparent !important;}`.
 
+##### page
+
+Type: `Boolean`  
+Default: `false`
+
+This will try to capture the whole page. `width` and `height` are considered the minimum size.
+
 #### close()
 
 Will close the screenshot service. Needed to let the node process exit
@@ -102,6 +109,7 @@ Will close the screenshot service. Needed to let the node process exit
 ##### `1.1.1`
 
   * Fixed some issues with error handeling
+  * Stop `electron` from closing when last window was closed
 
 ##### `1.1.0`
 

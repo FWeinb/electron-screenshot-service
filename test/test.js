@@ -1,8 +1,6 @@
 /* globals  assert, describe, it */
 'use strict';
 
-var http = require('http');
-
 var assert = require('assert');
 var isPng = require('is-png');
 
@@ -12,12 +10,10 @@ describe('screenshot', function(){
   this.timeout(30000);
 
   it('should produce pngs', function(done){
-
     screenshot({url : 'about:blank', width : 500, height : 500}).then(function(img) {
       assert.ok(isPng(img.data));
       done();
     });
-
   });
 
 
@@ -46,11 +42,14 @@ describe('screenshot', function(){
       assert.equal(err.message, 'At least `height` and `width` must be set');
       done();
     });
-
   });
 
-  afterEach(function(){
-    screenshot.close();
+  it('should warn about missing `width`', function(done) {
+    screenshot({url : 'about:blank'})
+    .catch(function(err){
+      assert.equal(err.message, 'At least `height` and `width` must be set');
+      done();
+    });
   });
 
 });

@@ -9,6 +9,9 @@ var show = process.env.NODESCREENSHOT_SHOW === '1' ? true: false;
 
 sock.connect(parseInt(process.env.PORT, 10));
 
+// Prevent closing
+app.on('window-all-closed', function(){});
+
 app.on('ready', function() {
 
   if ( process.platform === 'darwin' && app.dock.hide !== undefined ) {
