@@ -4,7 +4,7 @@
   "description": "Take screenshots using electron",
   "version": "1.1.1",
   "author": "Fabrice Weinberg <Fabrice@weinberg.me>",
-  "repository": "https://github.com/FWeinb/node-osascript",
+  "repository": "https://github.com/FWeinb/electron-screenshot-service",
   "license": "MIT",
   "scripts": {
     "postinstall": "npm install --prefix ./electron-screenshot && node ./install.js",
