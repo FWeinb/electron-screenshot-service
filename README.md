@@ -85,11 +85,25 @@ Default: `undefined`
 
 This css will be injected into the page before the screenshot is taken.
 
+##### transparent
+
+Type: `Boolean`  
+Default: `false`
+
+This will enable transparency. Keep in mind that most site do set a background color on the html/body tag.
+You can overwrite this by using the `css` option using something like `html,body{ background-color: transparent !important;}`.
+
 #### close()
 
 Will close the screenshot service. Needed to let the node process exit
 
 # Changelog
+
+##### `1.1.0`
+
+  * Upgrade to `electron@0.27.1`.
+  * Use `electron-downloader`.
+  * Add `transparent` support. 
 
 ##### `1.0.2`
 
