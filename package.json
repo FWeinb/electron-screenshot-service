@@ -7,6 +7,16 @@
     "postinstall": "npm install --prefix ./electron-screenshot && node ./install.js",
     "test": "./node_modules/mocha/bin/mocha test"
   },
+  "files": [
+    "electron-screenshot",
+    "example",
+    "src",
+    "test",
+    "install.js",
+    "paths.js",
+    "LICENSE",
+    "README.md"
+  ],
   "dependencies": {
     "axon": "^2.0.1",
     "bluebird": "^2.9.24",
