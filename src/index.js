@@ -19,7 +19,8 @@ module.exports = function(options){
       .screenshot(options)
       .then(resolve)
       .catch(reject);
-    });
+    })
+    .catch(reject);
   });
 };
 

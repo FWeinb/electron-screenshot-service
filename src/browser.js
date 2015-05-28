@@ -52,26 +52,32 @@ var createBrowser = function() {
 
   _isStarted = new Promise(function( resolve, reject ) {
     sock.on('connect', function() {
-      resolve( new Browser(sock) );
+        resolve( new Browser(sock) );
     });
 
     sock.on('error', function( error ) {
-      reject(error);
-    });
-  });
-
-  // Start the server on a free port
-  sock.bind(undefined, 'localhost', function() {
-    process.env.PORT = sock.server.address().port;
-    var child = spawn(electronpath, [
-      '.'
-    ],{
-      cwd: app,
-      detached: true,
-      stdio: 'ignore'
+        reject({ type: 'socket', error: error });
     });
 
-    child.unref();
+
+    // Start the server on a free port
+    sock.bind(undefined, 'localhost', function() {
+        process.env.PORT = sock.server.address().port;
+        var child = spawn(electronpath, [
+          '.'
+        ],{
+          cwd: app,
+          detached: true,
+          stdio: 'ignore'
+        });
+
+        child.on('exit', function(error){
+            reject({ type: 'electron', error: error });
+        });
+        // Make it a deamon
+        child.unref();
+    });
+
   });
 
   return _isStarted;
