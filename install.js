@@ -1,6 +1,6 @@
 'use strict';
 
-var version = '0.27.1';
+var version = '0.28.1';
 
 var path = require('path');
 var extract = require('extract-zip');

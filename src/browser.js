@@ -46,11 +46,13 @@ Browser.prototype.screenshot = function( options ) {
 
 var _isStarted;
 var sock;
+var child;
 
 var createBrowser = function() {
   sock = axon.socket('req');
 
   _isStarted = new Promise(function( resolve, reject ) {
+
     sock.on('connect', function() {
         resolve( new Browser(sock) );
     });
@@ -59,23 +61,19 @@ var createBrowser = function() {
         reject({ type: 'socket', error: error });
     });
 
-
     // Start the server on a free port
     sock.bind(undefined, 'localhost', function() {
         process.env.PORT = sock.server.address().port;
-        var child = spawn(electronpath, [
+        child = spawn(electronpath, [
           '.'
         ],{
           cwd: app,
-          detached: true,
           stdio: 'ignore'
         });
 
         child.on('exit', function(error){
             reject({ type: 'electron', error: error });
         });
-        // Make it a deamon
-        child.unref();
     });
 
   });
@@ -94,6 +92,7 @@ module.exports = {
     if (sock) {
       try{
         sock.close();
+        child.kill();
       }catch(e){}
     }
   }
