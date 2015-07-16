@@ -6,7 +6,7 @@ var axon = require('axon');
 var spawn = require('win-spawn');
 var Promise = require('bluebird');
 
-var electronpath = require('../paths');
+var electronpath = require('electron-prebuilt');
 var app =  path.join(__dirname, '../', 'electron-screenshot');
 
 var Browser = function( sock ) {

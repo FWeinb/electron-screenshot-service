@@ -136,6 +136,7 @@ function takeScreenshot(options, sCall, eCall) {
   };
 
   popupWindow.webContents.on('did-fail-load', function(e, errorCode, errorDescription) {
+    if (errorCode === -3) return; // Ignore user abort
     eCall(new Error(errorDescription));
     cleanup();
   });

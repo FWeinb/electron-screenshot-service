@@ -2,12 +2,11 @@
   "name": "electron-screenshot-service",
   "main": "src/index.js",
   "description": "Take screenshots using electron",
-  "version": "1.1.2",
+  "version": "1.1.4",
   "author": "Fabrice Weinberg <Fabrice@weinberg.me>",
   "repository": "https://github.com/FWeinb/electron-screenshot-service",
   "license": "MIT",
   "scripts": {
-    "postinstall": "npm install --prefix ./electron-screenshot && node ./install.js",
     "test": "./node_modules/mocha/bin/mocha test"
   },
   "files": [
@@ -15,16 +14,13 @@
     "example",
     "src",
     "test",
-    "install.js",
-    "paths.js",
     "LICENSE",
     "README.md"
   ],
   "dependencies": {
-    "axon": "^2.0.1",
-    "bluebird": "^2.9.24",
-    "electron-download": "^1.0.5",
-    "extract-zip": "^1.0.3",
+    "axon": "^2.0.2",
+    "bluebird": "^2.9.34",
+    "electron-prebuilt": "^0.30.0",
     "win-spawn": "^2.0.0"
   },
   "devDependencies": {
