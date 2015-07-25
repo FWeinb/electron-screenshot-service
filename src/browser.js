@@ -73,7 +73,7 @@ var createBrowser = function () {
       });
 
       child.on('exit', function (error) {
-        reject({type: 'electron', error: error});
+        reject({type: 'electron', path: electronpath, error: error});
       });
     });
 
