@@ -15,7 +15,7 @@ describe('screenshot', function () {
       done();
     })
     .catch(function (err) {
-      console.error(err.stack);
+      console.error(err);
     });
   });
 
