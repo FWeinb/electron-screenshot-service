@@ -2,6 +2,7 @@
   "name": "electron-screenshot",
   "main": "index.js",
   "dependencies": {
-    "axon": "^2.0.1"
+    "axon": "^2.0.1",
+    "electron-screenshot-app": "^1.0.0"
   }
 }
