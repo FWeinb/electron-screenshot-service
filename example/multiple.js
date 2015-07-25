@@ -5,7 +5,7 @@ var Promise = require('bluebird');
 var screenshot = require('../');
 
 
-Promise.all(['http://www.sassdoc.com/'].map(function(url){
+Promise.all(['http://www.sassdoc.com/'].map(function (url) {
   console.log('Screenshot, ', url);
   return screenshot({
       url: url,
@@ -16,12 +16,12 @@ Promise.all(['http://www.sassdoc.com/'].map(function(url){
       css: '::-webkit-scrollbar{opacity:0 !important;display: none !important;}'
     });
 }))
-.then(function(arr){
-  arr.forEach(function(img, i){
-    fs.writeFileSync('./out'+i+'.png', img.data);
+.then(function (arr) {
+  arr.forEach(function (img, i) {
+    fs.writeFileSync('./out' + i + '.png', img.data);
   });
   screenshot.close();
 })
-.catch(function(err){
+.catch(function (err) {
   console.log(err);
 });

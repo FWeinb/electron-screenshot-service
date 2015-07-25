@@ -13,6 +13,9 @@ describe('screenshot', function () {
     .then(function (img) {
       assert.ok(isPng(img.data));
       done();
+    })
+    .catch(function (err) {
+      console.error(err.stack);
     });
   });
 
