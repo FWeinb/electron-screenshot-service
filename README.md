@@ -106,6 +106,11 @@ Will close the screenshot service. Needed to let the node process exit
 
 # Changelog
 
+##### `1.2.0`
+
+  * Upgrade to `electron@0.30.1`.
+  * Extract core functionality into [electron-screenshot-app](https://github.com/FWeinb/electron-screenshot-app) (See [#4](https://github.com/FWeinb/electron-screenshot-service/issues/4))
+
 ##### `1.1.4`
 
   * Upgrade to `electron@0.30.0`.

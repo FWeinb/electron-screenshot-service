@@ -10,7 +10,7 @@
     "test": "./node_modules/mocha/bin/mocha test"
   },
   "files": [
-    "electron-screenshot",
+    "electron-service",
     "example",
     "src",
     "test",
@@ -20,11 +20,10 @@
   "dependencies": {
     "axon": "^2.0.2",
     "bluebird": "^2.9.34",
-    "electron-prebuilt": "^0.30.0",
+    "electron-prebuilt": "^0.30.1",
     "win-spawn": "^2.0.0"
   },
   "devDependencies": {
-    "image-size": "^0.3.2",
     "is-png": "^1.0.0",
     "mocha": "^2.2.4"
   }
