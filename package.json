@@ -7,7 +7,7 @@
   "repository": "https://github.com/FWeinb/electron-screenshot-service",
   "license": "MIT",
   "scripts": {
-    "postinstall": "npm install --prefix ./atom-screenshot",
+    "postinstall": "npm install --prefix ./electron-service",
     "test": "./node_modules/mocha/bin/mocha test"
   },
   "files": [
