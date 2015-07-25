@@ -4,17 +4,16 @@ var Promise = require('bluebird');
 
 var browserManager = require('./browser.js');
 
-
 /**
- * Takes an options object liek
- * { url : '', delay : [seconds], width : [size], heihgt :  [size], css : '[custom css]', format : 'png|jpeg' default png };
- * returns a promise
+ * Takes a screenshot
+ * @param {Object} options The first number.
+ * @returns {Promise} Resolves to image object
  */
-module.exports = function(options){
-  return new Promise(function(resolve, reject) {
+module.exports = function (options) {
+  return new Promise(function (resolve, reject) {
     browserManager
     .getBrowser()
-    .then(function(browser){
+    .then(function (browser) {
       browser
       .screenshot(options)
       .then(resolve)
@@ -24,7 +23,11 @@ module.exports = function(options){
   });
 };
 
-module.exports.close = function(){
+/**
+ * Close the browser
+ * @returns {void}
+ */
+module.exports.close = function () {
   browserManager.close();
 };
 
