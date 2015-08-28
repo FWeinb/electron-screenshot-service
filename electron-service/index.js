@@ -20,11 +20,11 @@ app.on('ready', function () {
       case 'take-screenshot' :
         screenshot(
           options,
-          function (err, data) {
+          function (err, data, cleanup) {
             if (err !== undefined) {
-              return reply(error, null);
+              return reply(error, null, cleanup);
             }
-            reply(null, data);
+            reply(null, data, cleanup);
           }
         );
         break;

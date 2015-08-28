@@ -5,15 +5,15 @@ var Promise = require('bluebird');
 var screenshot = require('../');
 
 
-Promise.all(['http://www.sassdoc.com/'].map(function (url) {
+Promise.all(['http://www.google.de/'].map(function (url) {
   console.log('Screenshot, ', url);
   return screenshot({
       url: url,
       width: 1024,
       height: 768,
-      page: true,
       // hide scrollbars
-      css: '::-webkit-scrollbar{opacity:0 !important;display: none !important;}'
+      transparent: true,
+      css: 'body{ background:transparent !important;}\n::-webkit-scrollbar{opacity:0 !important;display: none !important;}'
     });
 }))
 .then(function (arr) {
