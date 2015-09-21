@@ -2,7 +2,7 @@ language: node_js
 env:
   - NODESCREENSHOT_SHOW=1
 node_js:
-  - '0.12'
+  - '4.1.0'
 sudo: false
 addons:
   apt:
