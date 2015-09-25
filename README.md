@@ -106,6 +106,10 @@ Will close the screenshot service. Needed to let the node process exit
 
 # Changelog
 
+##### `1.5.2`
+
+* Upgrade to `electron@0.33.2`.
+
 ##### `1.5.1`
 
 * Upgrade to `electron@0.33.1`.
