@@ -21,7 +21,7 @@
   "dependencies": {
     "axon": "^2.0.2",
     "bluebird": "^2.9.34",
-    "electron-prebuilt": "^0.33.2",
+    "electron-prebuilt": "^0.33.4",
     "win-spawn": "^2.0.0"
   },
   "devDependencies": {
