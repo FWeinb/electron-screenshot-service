@@ -22,7 +22,7 @@ app.on('ready', function () {
           options,
           function (err, data, cleanup) {
             if (err !== undefined) {
-              return reply(error, null, cleanup);
+              return reply(err, null, cleanup);
             }
             reply(null, data, cleanup);
           }
