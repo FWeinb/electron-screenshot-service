@@ -106,6 +106,10 @@ Will close the screenshot service. Needed to let the node process exit
 
 # Changelog
 
+##### `1.5.3`
+
+* Fix a typo in error handeling code. (Thanks to [@adig](https://github.com/adig) [#6](https://github.com/FWeinb/electron-screenshot-service/pull/6))
+
 ##### `1.5.2`
 
 * Upgrade to `electron@0.33.4`.
