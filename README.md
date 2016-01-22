@@ -2,7 +2,7 @@ electron-screenshot-service [![Build Status](https://travis-ci.org/FWeinb/electr
 ====================
 > Take screenshots using electron
 
-# Install 
+# Install
 
 ```shell
 npm install electron-screenshot-service
@@ -100,11 +100,22 @@ Default: `false`
 
 This will try to capture the whole page. `width` and `height` are considered the minimum size.
 
-#### close()
+#### screenshot.close()
 
 Will close the screenshot service. Needed to let the node process exit
 
+#### screenshot.scale(scale)
+
+Scale the number of electron processes to `scale` processes. This will delegate the screenshot
+jobs across `scale` instanced
+
 # Changelog
+
+##### `2.0.0`
+
+* Upgrade to `electron@0.36.5`.
+* Fix race-condition in error reporting.
+* Add `screenshot.scale` API
 
 ##### `1.7.0`
 
@@ -182,7 +193,7 @@ Will close the screenshot service. Needed to let the node process exit
 
   * Upgrade to `electron@0.27.1`.
   * Use `electron-downloader`.
-  * Add `transparent` support. 
+  * Add `transparent` support.
 
 ##### `1.0.2`
 
@@ -217,26 +228,26 @@ Will close the screenshot service. Needed to let the node process exit
 
 ##### `0.4.1`
 
-  * Cleanup repository 
+  * Cleanup repository
   * Remove duplicated dependency to `socket.io-client`
 
 ##### `0.4.0`
-  
-  * Update to atom-shell `0.20.6`. 
+
+  * Update to atom-shell `0.20.6`.
   * Better handeling of pages with iframes
   * Include `jquery` because of a "bug" in `atom-shell` (See [#254](See https://github.com/atom/atom-shell/issues/254))
   * Better error handeling
 
 ##### `0.3.2`
-  
+
   * Use `window.requestAnimationFrame` to be sure that at least one paint has happend.
 
 ##### `0.3.1`
-  
+
   * Force a redraw after injecting css
 
 ##### `0.3.0`
-  
+
   * Add `css` option to inject custom css
 
 ##### `0.2.0`

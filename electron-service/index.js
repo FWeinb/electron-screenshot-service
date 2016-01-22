@@ -1,39 +1,36 @@
 'use strict';
 
-var app = require('app');
+const app = require('app');
+const screenshot = require('electron-screenshot-app');
+const sock = require('axon').socket('rep');
 
-var screenshot = require('electron-screenshot-app');
-var sock = require('axon').socket('rep');
+const terminate = () => {
+	app.terminate();
+	app.quit();
+};
 
-sock.connect(parseInt(process.env.PORT, 10));
+sock.connect(parseInt(process.env.ELECTRON_SCREENSHOT_PORT, 10));
 
-app.on('window-all-closed', function () {});
+app.on('window-all-closed', () => {});
+app.on('ready', () => {
+	if (process.platform === 'darwin' && app.dock.hide !== undefined) {
+		app.dock.hide();
+	}
 
-app.on('ready', function () {
-
-  if (process.platform === 'darwin' && app.dock.hide !== undefined) {
-    app.dock.hide();
-  }
-
-  sock.on('message', function (task, options, reply) {
-    switch (task) {
-      case 'take-screenshot' :
-        screenshot(
-          options,
-          function (err, data, cleanup) {
-            if (err !== undefined) {
-              return reply(err, null, cleanup);
-            }
-            reply(null, data, cleanup);
-          }
-        );
-        break;
-    }
-  });
-
-  sock.on('close', function () {
-    app.terminate();
-    app.quit();
-  });
-
+	sock.on('message', (task, options, reply) => {
+		switch (task) {
+			case 'take-screenshot' :
+				screenshot(
+					options,
+					function (err, data, cleanup) {
+						return reply(err ? err.message : null, data, cleanup);
+					}
+				);
+				break;
+			case 'close' :
+				terminate();
+				break;
+			default:
+		}
+	});
 });

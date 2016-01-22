@@ -2,7 +2,9 @@ language: node_js
 env:
   - NODESCREENSHOT_SHOW=1
 node_js:
-  - '4.1.0'
+  - '5'
+before_install:
+  - 'npm i -g npm@latest'
 sudo: false
 addons:
   apt:
