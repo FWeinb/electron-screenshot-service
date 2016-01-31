@@ -40,6 +40,8 @@ Will return a Promise containing an object like:
 }
 ```
 
+In addition to [all options](http://electron.atom.io/docs/v0.36.5/api/browser-window/#new-browserwindow-options) that can be passed to the BrowserWindow you can pass:
+
 ##### delay
 
 Type: `number` *(seconds)*  
@@ -106,10 +108,16 @@ Will close the screenshot service. Needed to let the node process exit
 
 #### screenshot.scale(scale)
 
-Scale the number of electron processes to `scale` processes. This will delegate the screenshot
-jobs across `scale` instanced
+Scale the number of electron processes to `scale` processes. This will round-robin the screenshot
+jobs across `scale` instances.
 
 # Changelog
+
+##### `2.1.0`
+
+* Upgrade to `electron@0.36.6`.
+* Update to `electron-screenshot-app@2.1.0` fixing #11
+
 
 ##### `2.0.0`
 
