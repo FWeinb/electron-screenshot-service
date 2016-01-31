@@ -21,7 +21,7 @@
   "dependencies": {
     "axon": "^2.0.2",
     "bluebird": "^2.9.34",
-    "electron-prebuilt": "0.35.5",
+    "electron-prebuilt": "0.36.6",
     "cross-spawn-async": "^2.1.0"
   },
   "devDependencies": {
