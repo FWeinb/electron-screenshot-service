@@ -113,6 +113,10 @@ jobs across `scale` instances.
 
 # Changelog
 
+##### `2.2.1`
+
+* Fix installation on windows (#14)
+
 ##### `2.2.0`
 
 * Upgrade to `electron@0.36.7`.
