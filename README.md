@@ -49,7 +49,7 @@ Default: `0`
 
 Delay capturing the screenshot.
 
-Useful when the site does things after load that you want to capture.
+Useful when the site does things after loading that you want to capture.
 
 ##### width
 
@@ -112,6 +112,11 @@ Scale the number of electron processes to `scale` processes. This will round-rob
 jobs across `scale` instances.
 
 # Changelog
+
+##### `2.2.0`
+
+* Upgrade to `electron@0.36.7`.
+* Update to `electron-screenshot-app@2.2.0`
 
 ##### `2.1.0`
 
