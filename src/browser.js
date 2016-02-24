@@ -79,7 +79,7 @@ module.exports = {
 			spawn(electronpath, ['.'], {
 				cwd: app
 			})
-			.once('close', function() {
+			.once('close', function () {
 				self.count--;
 			});
 		});
