@@ -8,12 +8,6 @@ var electronpath = require('electron-prebuilt');
 var app = path.join(__dirname, '../', 'electron-service');
 var sock = axon.socket('req');
 
-var startElectron = function () {
-	spawn(electronpath, ['.'], {
-		cwd: app
-	});
-};
-
 var bindSocketPromise;
 var bindSocket = function () {
 	if (bindSocketPromise) {
@@ -78,10 +72,16 @@ module.exports = {
 	},
 
 	createBrowser: function () {
+		var self = this;
 		this.count++;
 		return bindSocket()
 		.then(function () {
-			startElectron();
+			spawn(electronpath, ['.'], {
+				cwd: app
+			})
+			.once('close', function() {
+				self.count--;
+			});
 		});
 	},
 
