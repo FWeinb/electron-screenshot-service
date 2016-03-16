@@ -114,6 +114,10 @@ jobs across `scale` instances.
 # Changelog
 
 
+##### `2.3.0`
+
+* Update to `electron@0.37.2`
+
 ##### `2.2.1`
 
 * Fix a bug in `count` not being updated when an electron process dies (Thanks to [asafyish](https://github.com/asafyish))
