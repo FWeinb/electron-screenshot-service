@@ -1,11 +1,10 @@
 'use strict';
 
-const app = require('app');
+const {app} = require('electron');
 const screenshot = require('electron-screenshot-app');
 const sock = require('axon').socket('rep');
 
 const terminate = () => {
-	app.terminate();
 	app.quit();
 };
 

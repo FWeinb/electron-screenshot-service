@@ -114,6 +114,11 @@ jobs across `scale` instances.
 # Changelog
 
 
+##### `3.0.0`
+
+* Update to `electron@1.1.0`
+* Update to `electron-screenshot-app@3.0.0`
+
 ##### `2.3.1`
 
 * Update to `electron@0.37.7`
