@@ -117,6 +117,8 @@ jobs across `scale` instances.
 ##### `3.1.0`
 
 * Update to `electron@1.2.0`
+* Use `cross-spawn` insated of `cross-spawn-async`
+* Update dependencies
 
 ##### `3.0.0`
 

@@ -2,7 +2,7 @@
 
 var path = require('path');
 var axon = require('axon');
-var spawn = require('cross-spawn-async');
+var spawn = require('cross-spawn');
 
 var electronpath = require('electron-prebuilt');
 var app = path.join(__dirname, '../', 'electron-service');

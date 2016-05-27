@@ -20,14 +20,14 @@
   ],
   "dependencies": {
     "axon": "^2.0.2",
-    "bluebird": "^2.9.34",
-    "electron-prebuilt": "1.2.0",
-    "cross-spawn-async": "^2.1.0"
+    "bluebird": "^3.4.0",
+    "cross-spawn": "^4.0.0",
+    "electron-prebuilt": "1.2.0"
   },
   "devDependencies": {
     "is-png": "^1.0.0",
-    "xo": "^0.12.0",
-    "mocha": "^2.2.4",
+    "xo": "^0.15.1",
+    "mocha": "^2.5.3",
     "pngparse": "^2.0.1"
   },
   "xo": {
