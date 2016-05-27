@@ -37,7 +37,7 @@ describe('screenshot', function () {
 	it('should throw if page isn\'t found', function (done) {
 		screenshot({url: 'http://thiswillnotbefound.nonono', width: 500, height: 500})
 		.catch(function (err) {
-			assert.equal(err.message, '[-105] ');
+			assert.equal(err.message, '[-105] ERR_NAME_NOT_RESOLVED');
 			done();
 		});
 	});
