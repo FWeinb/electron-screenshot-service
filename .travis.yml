@@ -3,7 +3,7 @@ env:
   - NODESCREENSHOT_SHOW=1
 node_js:
   - '5'
-  - 'latest'
+  - '6'
 before_install:
   - 'npm i -g npm@latest'
 sudo: false
