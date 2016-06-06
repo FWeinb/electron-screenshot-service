@@ -15,7 +15,7 @@ var bindSocket = function () {
 	}
 
 	bindSocketPromise = new Promise(function (resolve) {
-		sock.bind(undefined, 'localhost', function () {
+		sock.bind(0, 'localhost', function () {
 			process.env.ELECTRON_SCREENSHOT_PORT = sock.server.address().port;
 			resolve();
 		});
