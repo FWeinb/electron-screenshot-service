@@ -114,6 +114,10 @@ jobs across `scale` instances.
 # Changelog
 
 
+##### `3.1.2`
+
+* Update to `electron@1.2.5`
+
 ##### `3.1.1`
 
 * Fix bug that prevent running in node `^6.0.0`
