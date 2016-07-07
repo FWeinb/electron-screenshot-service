@@ -97,6 +97,6 @@ module.exports = {
 		}
 		sock.close();
 		bindSocketPromise = undefined;
-		this.browserCount = 0;
+		this.count = 0;
 	}
 };
