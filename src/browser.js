@@ -24,6 +24,19 @@ var bindSocket = function () {
 	return bindSocketPromise;
 };
 
+sock.on('close', function() {
+	console.log('sock closed');
+});
+sock.on('error', function(err) {
+	console.log('sock error' + err);
+});
+sock.on('connect', function() {
+	console.log('sock connect');
+});
+sock.on('disconnect', function() {
+	console.log('sock disconnect');
+});
+
 var screenshot = function (options) {
 	return new Promise(function (resolve, reject) {
 		options.delay = options.delay || 0;
@@ -46,6 +59,7 @@ var screenshot = function (options) {
 			}
 		}
 
+		console.log('Taking screenshot');
 		sock.send('take-screenshot', options, function (error, img) {
 			if (error) {
 				reject(new Error(error));
@@ -63,7 +77,9 @@ module.exports = {
 	count: 0,
 
 	screenshot: function (options) {
+		console.log(this.count);
 		if (this.count === 0) {
+			console.log('Creating new browser.');
 			return this.createBrowser()
 			.then(screenshot.bind(null, options));
 		}
@@ -80,23 +96,31 @@ module.exports = {
 				cwd: app
 			})
 			.once('close', function () {
-				self.count--;
 			});
 		});
 	},
 
 	close: function () {
 		if (this.count > 0) {
-			sock.send('close');
+			console.log('Closing browser.');
+			sock.send('close', {}, function(msg) {
+				console.log('Closed browser.');
+			});
 		}
 	},
 
 	closeAll: function () {
+		console.log('Closing ' + this.count + ' browsers.');
+
 		for (var i = 0; i < this.count; i++) {
-			sock.send('close');
+                    sock.send('close', {}, function(msg) {
+                        console.log('Closed browser.');
+                    });
 		}
-		sock.close();
-		bindSocketPromise = undefined;
-		this.browserCount = 0;
+
+                console.log('All browsers closed. Return.');
+                sock.close();
+                bindSocketPromise = undefined;
+                this.count = 0;
 	}
 };
