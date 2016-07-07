@@ -22,7 +22,8 @@
     "axon": "^2.0.2",
     "bluebird": "^3.4.0",
     "cross-spawn": "^4.0.0",
-    "electron-prebuilt": "1.2.5"
+    "electron-prebuilt": "1.2.5",
+    "async": "2.0.0-rc.6"
   },
   "devDependencies": {
     "is-png": "^1.0.0",

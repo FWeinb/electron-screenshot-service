@@ -30,8 +30,8 @@ module.exports.scale = function (scale) {
  * Close one browser
  * @returns {void}
  */
-module.exports.close = function () {
-	browser.closeAll();
+module.exports.close = function (callback) {
+	browser.closeAll(callback);
 };
 
 // Ensure that the Browser instance will be closed on exit

@@ -5,7 +5,7 @@ const screenshot = require('electron-screenshot-app');
 const sock = require('axon').socket('rep');
 
 const terminate = () => {
-	app.quit();
+	app.exit(0);
 };
 
 sock.connect(parseInt(process.env.ELECTRON_SCREENSHOT_PORT, 10));
@@ -27,9 +27,12 @@ app.on('ready', () => {
 				);
 				break;
 			case 'close' :
+				reply('Closing')
+				sock.close();
 				terminate();
 				break;
 			default:
 		}
 	});
 });
+
