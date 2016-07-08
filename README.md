@@ -114,6 +114,10 @@ jobs across `scale` instances.
 # Changelog
 
 
+##### `3.1.3`
+
+* Fix bug in keeping `browserCount` correct. (Thanks to [jerbob92](https://github.com/FWeinb/electron-screenshot-service/pull/22))
+
 ##### `3.1.2`
 
 * Update to `electron@1.2.5`
