@@ -87,6 +87,30 @@ Default: `undefined`
 
 This css will be injected into the page before the screenshot is taken.
 
+##### js
+
+Type: `String` || `Function`  
+Default: `undefined`
+
+This is either a `String` or a `Function`. If it is a `String` it must contain a
+function definition that takes on parameter e.g.
+```js
+js: 'function(takeScreenshot){ /*Do some stuff*/ takeScreenshot();}'
+```
+or
+```js
+js: 'takeScreenshot => { /*Do some stuff*/ takeScreenshot();}'
+```
+
+If it is a function you can just add it like:
+```js
+js: function(takeScreenshot){ /*Do some stuff*/ takeScreenshot();}
+```
+or
+```js
+js: (takeScreenshot) => { /*Do some stuff*/ takeScreenshot();}
+```
+
 ##### transparent
 
 Type: `Boolean`  
@@ -113,6 +137,10 @@ jobs across `scale` instances.
 
 # Changelog
 
+##### `3.2.0`
+
+* Update to `electron-screenshot-app@3.1.0`
+* Support `options.js`
 
 ##### `3.1.3`
 
