@@ -137,6 +137,10 @@ jobs across `scale` instances.
 
 # Changelog
 
+##### `3.2.1`
+
+* Fix post install script on windows 
+
 ##### `3.2.0`
 
 * Update to `electron-screenshot-app@3.1.0`
