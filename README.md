@@ -137,9 +137,13 @@ jobs across `scale` instances.
 
 # Changelog
 
+##### `3.2.2`
+
+* Update to `electron@1.2.7`
+
 ##### `3.2.1`
 
-* Fix post install script on windows 
+* Fix post install script on windows
 
 ##### `3.2.0`
 
