@@ -89,26 +89,16 @@ This css will be injected into the page before the screenshot is taken.
 
 ##### js
 
-Type: `String` || `Function`  
+Type: `String`  
 Default: `undefined`
 
-This is either a `String` or a `Function`. If it is a `String` it must contain a
-function definition that takes on parameter e.g.
+It must contain a function definition that takes on parameter e.g.
 ```js
 js: 'function(takeScreenshot){ /*Do some stuff*/ takeScreenshot();}'
 ```
 or
 ```js
 js: 'takeScreenshot => { /*Do some stuff*/ takeScreenshot();}'
-```
-
-If it is a function you can just add it like:
-```js
-js: function(takeScreenshot){ /*Do some stuff*/ takeScreenshot();}
-```
-or
-```js
-js: (takeScreenshot) => { /*Do some stuff*/ takeScreenshot();}
 ```
 
 ##### transparent

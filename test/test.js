@@ -18,6 +18,27 @@ describe('screenshot', function () {
 		});
 	});
 
+	it('should work with a function as string', function (done) {
+		screenshot({
+			url: 'about:blank',
+			width: 10,
+			height: 10,
+			js: '(t) => { document.body.style.background = "#F00"; t(); }'
+		})
+		.then(function (img) {
+			pngparse.parse(img.data, function (err, pixels) {
+				assert.equal(err, undefined);
+				assert.equal(pixels.data[0], 255);
+				assert.equal(pixels.data[1], 0);
+				assert.equal(pixels.data[2], 0);
+				done();
+			});
+		})
+		.catch(function (err) {
+			console.error(err);
+		});
+	});
+
 	it('should warn about missing `height`', function (done) {
 		screenshot({url: 'about:blank', width: 500})
 		.catch(function (err) {
