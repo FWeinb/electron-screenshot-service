@@ -137,6 +137,10 @@ jobs across `scale` instances.
 
 # Changelog
 
+##### `3.3.0`
+
+* Update to `electron@1.3.1`
+
 ##### `3.2.3`
 
 * Fix PORT bug on windows (Thanks to [peerbolte](https://github.com/FWeinb/electron-screenshot-service/pull/26))
