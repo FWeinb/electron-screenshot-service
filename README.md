@@ -127,6 +127,10 @@ jobs across `scale` instances.
 
 # Changelog
 
+##### `3.3.1`
+
+* Update to `electron@1.3.4`
+
 ##### `3.3.0`
 
 * Update to `electron@1.3.1`
