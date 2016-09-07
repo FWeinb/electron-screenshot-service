@@ -44,7 +44,7 @@ In addition to [all options](http://electron.atom.io/docs/v0.36.5/api/browser-wi
 
 ##### delay
 
-Type: `number` *(seconds)*  
+Type: `number` *(milliseconds)*  
 Default: `0`
 
 Delay capturing the screenshot.
