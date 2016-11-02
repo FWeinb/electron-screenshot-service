@@ -2,8 +2,9 @@ language: node_js
 env:
   - NODESCREENSHOT_SHOW=1
 node_js:
-  - '5'
+  - '4'
   - '6'
+  - 'node'
 before_install:
   - 'npm i -g npm@latest'
 sudo: false

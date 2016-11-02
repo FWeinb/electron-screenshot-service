@@ -127,6 +127,11 @@ jobs across `scale` instances.
 
 # Changelog
 
+##### `4.0.2`
+
+* Update to `electron@1.4.5`
+* Add version to sub-package fixing [#33](https://github.com/FWeinb/electron-screenshot-service/issues/33)
+
 ##### `4.0.1`
 
 * Update to `electron@1.4.1`
