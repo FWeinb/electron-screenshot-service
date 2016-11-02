@@ -20,15 +20,15 @@
   ],
   "dependencies": {
     "axon": "^2.0.2",
-    "bluebird": "^3.4.0",
-    "cross-spawn": "^4.0.0",
-    "electron": "1.4.1"
+    "bluebird": "^3.4.6",
+    "cross-spawn": "^5.0.0",
+    "electron": "^1.4.5"
   },
   "devDependencies": {
     "is-png": "^1.0.0",
-    "xo": "^0.16.0",
-    "mocha": "^2.5.3",
-    "pngparse": "^2.0.1"
+    "mocha": "^3.1.2",
+    "pngparse": "^2.0.1",
+    "xo": "^0.16.0"
   },
   "xo": {
     "esnext": false,
