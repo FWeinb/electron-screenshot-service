@@ -7,7 +7,7 @@ var screenshot = require('../');
 // Create 4 electron sub-processes
 screenshot.scale(4);
 
-Promise.all(['http://heise.de', 'http://sassdoc.com', 'https://css-tricks.com', 'https://google.de'].map(function (url) {
+Promise.all(['http://sassdoc.com', 'https://css-tricks.com', 'https://google.de', 'http://codepen.io'].map(function (url) {
 	console.log('Screenshot, ', url);
 	return screenshot({
 		url: url,
