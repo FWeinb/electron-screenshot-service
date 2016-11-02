@@ -1,8 +1,10 @@
 {
   "name": "electron-screenshot",
   "main": "index.js",
+  "version": "1.0.0",
   "dependencies": {
     "axon": "^2.0.1",
     "electron-screenshot-app": "^4.0.0"
-  }
+  },
+  "private": true
 }
