@@ -7,7 +7,6 @@ cache:
 env:
   - NODESCREENSHOT_SHOW=1
 node_js:
-  - '4'
   - '6'
   - 'node'
 before_install:
