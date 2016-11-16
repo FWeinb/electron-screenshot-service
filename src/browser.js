@@ -1,9 +1,9 @@
 'use strict';
 
 var path = require('path');
+var electronpath = require('electron');
 var axon = require('axon');
 var spawn = require('cross-spawn');
-var electronpath = require('electron');
 
 var app = path.join(__dirname, '../', 'electron-service');
 var sock = axon.socket('req');
