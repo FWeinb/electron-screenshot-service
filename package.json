@@ -22,7 +22,7 @@
     "axon": "^2.0.2",
     "bluebird": "^3.4.6",
     "cross-spawn": "^5.0.0",
-    "electron": "^1.4.7"
+    "electron": "^7.2.4"
   },
   "devDependencies": {
     "is-png": "^1.0.0",
